@@ -6,20 +6,41 @@ void menu(){
     cout << "Press x to enable and z to disable autoclicker\n";
 }
 
+string getInput(){
+
+    string input;
+    cin >> input;
+    return input;
+
+}
+
 void clicker(){
+    string stateInput = getInput();
+    stateInput = tolower(stateInput[0]); //converts input to lowercase
+    
     bool click = false; //sets default value to false or off
     while (true){
-        if(GetAsyncKeyState('x')){   //if x is pressed
+        if(stateInput == "x"){   //if x is pressed
             click = true; //sets click to true
+           // cout << "Autoclicker enabled\n"; //prints message
         }
-        else if(GetAsyncKeyState('z')){ //if z is pressed
-            click = false; //sets click to false
+        else if(stateInput == "z" ){ //if z is pressed
+            click = false; //sets click to falsex
+            // cout << "Autoclicker disabled\n"; //prints messagex
         
         }
-        if(click){ //if click is true
+        if(click == true){ //if click is true
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0); //clicks the mouse
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0); //releases the mouse
-            Sleep(10); //waits 10 milliseconds
+            cout << "Clicked!\n"; //prints message
+            Sleep(10); //waits 10 milliseconds before clicking and releasing again
+            
         }
     }
+}
+
+int main(){
+    menu();
+    clicker();
+    return 0;
 }
